@@ -32,11 +32,21 @@ factN:
 	; Comments regarding the factN subroutine go here
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	; recursive factorial code begins here
-
-
-
+	IN YH, SPH
+	IN YL, SPL
+	LDD R18, Y+3
+	CPI R18, 1
+	BRNE recursiveCase
+	ret
 recursiveCase:
-
-
+	DEC R18
+	PUSH R18
+	CALL factN
+	IN YH, SPH
+	IN YL, SPL
+	POP R18
+	LDD R19, Y+4
+	MUL R18, R19
+	STD Y+4, R0
 	ret 
 	; return from the factN subroutine
